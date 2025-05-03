@@ -29,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+
     @Override
     public Optional<User> findById(String id) {
         User user = entityManager.find(User.class, id);
