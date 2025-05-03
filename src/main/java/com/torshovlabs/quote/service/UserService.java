@@ -21,17 +21,14 @@ public class UserService {
 
     @Transactional
     public User registerUser(String username) {
-        // Check if username already exists
-        if (userDAO.existsByName(username)) {
+        if (userDAO.existsByName(username)) { // Checking if user exists
             throw new UsernameAlreadyExistsException("Username '" + username + "' is already taken");
         }
 
-        // Create new user
         User newUser = new User();
         newUser.setId(UUID.randomUUID().toString());
         newUser.setName(username);
 
-        // Save and return the user
         return userDAO.save(newUser);
     }
 }
