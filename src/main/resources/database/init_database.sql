@@ -13,7 +13,7 @@ CREATE TABLE `group` (
 );
 
 -- Create groupmembership table
-CREATE TABLE groupmembership (
+CREATE TABLE group_membership (
                                  id BIGINT AUTO_INCREMENT PRIMARY KEY,
                                  user_id BIGINT NOT NULL,
                                  group_id BIGINT NOT NULL,
