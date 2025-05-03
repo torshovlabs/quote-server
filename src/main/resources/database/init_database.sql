@@ -1,4 +1,4 @@
-# CREATE DATABASE `quote-db`;
+# CREATE DATABASE `quote_db`;
 
 -- Create app_user table with UUID as primary key
 CREATE TABLE app_user (
