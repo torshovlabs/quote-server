@@ -22,3 +22,27 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# IDE files (IntelliJ IDEA)
+.idea/
+
+# Build output directories
+target/
+
+# Eclipse files (if you ever use Eclipse)
+.classpath
+.project
+.settings/
+
+# VS Code files (if you ever use VS Code)
+.vscode/
+
+# Mac OS files (if you're on Mac)
+.DS_Store
+
+# Maven wrapper (optional - some projects commit this)
+.mvn/wrapper/maven-wrapper.jar
+
+# Application properties that might contain sensitive data (optional)
+# Uncomment if you have different properties per environment
+# src/main/resources/application-*.properties
