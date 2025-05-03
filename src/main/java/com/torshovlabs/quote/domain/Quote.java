@@ -17,6 +17,7 @@ public class Quote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
     @Column(nullable = false, length = 1000)
     private String content;
 
@@ -65,4 +66,19 @@ public class Quote {
                 ", publishDate=" + publishDate +
                 '}';
     }
+=======
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String quote;
+
+    @Column(nullable = false)
+    private String author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", nullable = false)
+    private Group group;
+>>>>>>> 4bc6e0ccffbc7441bfb742572c4695b64089aa6d
 }

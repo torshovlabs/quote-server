@@ -4,25 +4,39 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+<<<<<<< HEAD
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+=======
+import java.util.Set;
+>>>>>>> 4bc6e0ccffbc7441bfb742572c4695b64089aa6d
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+<<<<<<< HEAD
 @Table(name = "user_group") // Changed from "group" to avoid MySQL reserved keyword
 public class Group {
 
     @Id
     private String id;
+=======
+@Table(name = "`group`")
+public class Group {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+>>>>>>> 4bc6e0ccffbc7441bfb742572c4695b64089aa6d
 
     @Column(nullable = false)
     private String name;
 
+<<<<<<< HEAD
     @ManyToMany
     @JoinTable(
             name = "user_group_members",
@@ -106,4 +120,16 @@ public class Group {
                 ", lastRotationDate=" + lastRotationDate +
                 '}';
     }
+=======
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", nullable = false)
+    private User createdBy;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GroupMembership> groupMemberships;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Quote> quotes;
+
+>>>>>>> 4bc6e0ccffbc7441bfb742572c4695b64089aa6d
 }

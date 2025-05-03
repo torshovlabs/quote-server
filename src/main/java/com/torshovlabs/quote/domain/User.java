@@ -4,15 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+<<<<<<< HEAD
 import java.util.HashSet;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Map;
+=======
+import java.util.Set;
+>>>>>>> 4bc6e0ccffbc7441bfb742572c4695b64089aa6d
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+<<<<<<< HEAD
 @Table(name = "app_user", indexes = {
         @Index(name = "app_user_phone_number_idx", columnList = "phone_number")
 })
@@ -84,4 +89,21 @@ public class User {
                 ", groupCount=" + (groups != null ? groups.size() : 0) +
                 '}';
     }
+=======
+@Table(name = "app_user")
+public class User {
+
+    @Id
+    @Column(length = 36)
+    private String id;  // UUID generated in service layer
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GroupMembership> groupMemberships;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Quote> quotes;
+>>>>>>> 4bc6e0ccffbc7441bfb742572c4695b64089aa6d
 }
