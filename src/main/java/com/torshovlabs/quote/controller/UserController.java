@@ -2,7 +2,6 @@ package com.torshovlabs.quote.controller;
 
 import com.torshovlabs.quote.controller.dto.RegisterUserDTO;
 import jakarta.validation.Valid;
-import lombok.extern.log4j.Log4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@Log4j
 @RequestMapping("/api/user")
 @RestController
 public class UserController {
