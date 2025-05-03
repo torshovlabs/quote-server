@@ -9,18 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "quote")
-public class Quote {
+@Table(name = "group_membership",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "group_id"}))
+public class GroupMembership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String quote;
-
-    @Column(nullable = false)
-    private String author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -29,4 +24,7 @@ public class Quote {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
+
+    @Column(name = "queue_number", nullable = false)
+    private Integer queueNumber;
 }
