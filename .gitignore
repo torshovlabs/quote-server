@@ -24,7 +24,7 @@ hs_err_pid*
 replay_pid*
 
 # IDE files (IntelliJ IDEA)
-.idea/
+
 
 # Build output directories
 target/
