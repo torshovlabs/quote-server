@@ -52,6 +52,14 @@ public class GroupDAOImpl implements GroupDAO {
     }
 
     @Override
+    public List<Group> findByCreatedBy(String userId) {
+        TypedQuery<Group> query = entityManager.createQuery(
+                "SELECT g FROM Group g WHERE g.createdBy.id = :userId", Group.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    @Override
     public void deleteById(Long id) {
         Group group = entityManager.find(Group.class, id);
         if (group != null) {
@@ -60,10 +68,10 @@ public class GroupDAOImpl implements GroupDAO {
     }
 
     @Override
-    public List<Group> findByCreatedById(String userId) {
-        TypedQuery<Group> query = entityManager.createQuery(
-                "SELECT g FROM Group g WHERE g.createdBy.id = :userId", Group.class);
-        query.setParameter("userId", userId);
-        return query.getResultList();
+    public boolean existsByName(String name) {
+        TypedQuery<Long> query = entityManager.createQuery(
+                "SELECT COUNT(g) FROM Group g WHERE g.name = :name", Long.class);
+        query.setParameter("name", name);
+        return query.getSingleResult() > 0;
     }
 }

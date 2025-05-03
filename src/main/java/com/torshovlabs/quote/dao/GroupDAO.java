@@ -5,10 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GroupDAO {
+
     Group save(Group group);
+
     Optional<Group> findById(Long id);
+
     Optional<Group> findByName(String name);
+
     List<Group> findAll();
+
+    List<Group> findByCreatedBy(String userId);
+
     void deleteById(Long id);
-    List<Group> findByCreatedById(String userId);
+
+    boolean existsByName(String name);
 }
