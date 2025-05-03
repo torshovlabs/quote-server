@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user")
+@Table(name = "quote")
 public class Quote {
 
     @jakarta.persistence.Id
