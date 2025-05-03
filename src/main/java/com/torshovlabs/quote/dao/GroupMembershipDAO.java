@@ -16,6 +16,14 @@ public interface GroupMembershipDAO {
 
     List<GroupMembership> findByGroup(Long groupId);
 
+    Optional<GroupMembership> findByGroupAndCanQuote(Long groupId, Boolean canQuote);
+
+    List<GroupMembership> findByGroupOrderByQueueNumber(Long groupId);
+
+    void updateCanQuoteStatus(Long membershipId, Boolean canQuote);
+
+    void resetAllCanQuoteForGroup(Long groupId, Boolean canQuote);
+
     void deleteById(Long id);
 
     boolean existsByUserAndGroup(String userId, Long groupId);

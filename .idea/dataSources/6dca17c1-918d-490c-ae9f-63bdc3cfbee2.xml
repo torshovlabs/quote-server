@@ -1135,89 +1135,99 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>4</Position>
       <StoredType>varchar(36)|0s</StoredType>
     </column>
-    <foreign-key id="318" parent="299" name="FKkbvtiw2ep118opw16e7pjjr5f">
+    <column id="318" parent="299" name="last_quote_time">
+      <Position>5</Position>
+      <StoredType>timestamp|0s</StoredType>
+    </column>
+    <column id="319" parent="299" name="can_quote">
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StoredType>tinyint(1)|0s</StoredType>
+    </column>
+    <foreign-key id="320" parent="299" name="FKkbvtiw2ep118opw16e7pjjr5f">
       <ColNames>group_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>group</RefTableName>
     </foreign-key>
-    <foreign-key id="319" parent="299" name="FKgf9shcanswa27edlkdk5h8pqk">
+    <foreign-key id="321" parent="299" name="FKgf9shcanswa27edlkdk5h8pqk">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>app_user</RefTableName>
     </foreign-key>
-    <index id="320" parent="299" name="PRIMARY">
+    <index id="322" parent="299" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="321" parent="299" name="UKobekhxig3axb25sv7bd0kjp4l">
+    <index id="323" parent="299" name="UKobekhxig3axb25sv7bd0kjp4l">
       <ColNames>user_id
 group_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="322" parent="299" name="FKkbvtiw2ep118opw16e7pjjr5f">
+    <index id="324" parent="299" name="FKkbvtiw2ep118opw16e7pjjr5f">
       <ColNames>group_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="323" parent="299" name="PRIMARY">
+    <key id="325" parent="299" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="324" parent="299" name="UKobekhxig3axb25sv7bd0kjp4l">
+    <key id="326" parent="299" name="UKobekhxig3axb25sv7bd0kjp4l">
       <UnderlyingIndexName>UKobekhxig3axb25sv7bd0kjp4l</UnderlyingIndexName>
     </key>
-    <column id="325" parent="300" name="id">
+    <column id="327" parent="300" name="id">
       <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="326" parent="300" name="author">
+    <column id="328" parent="300" name="author">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <column id="327" parent="300" name="quote">
+    <column id="329" parent="300" name="quote">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="328" parent="300" name="group_id">
+    <column id="330" parent="300" name="group_id">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>bigint|0s</StoredType>
     </column>
-    <column id="329" parent="300" name="user_id">
+    <column id="331" parent="300" name="user_id">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>varchar(36)|0s</StoredType>
     </column>
-    <foreign-key id="330" parent="300" name="FKlg7qo006o53btuduee8wg0yit">
+    <foreign-key id="332" parent="300" name="FKlg7qo006o53btuduee8wg0yit">
       <ColNames>group_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>group</RefTableName>
     </foreign-key>
-    <foreign-key id="331" parent="300" name="FKrc585nbh1yt2t3iryk5exodai">
+    <foreign-key id="333" parent="300" name="FKrc585nbh1yt2t3iryk5exodai">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>app_user</RefTableName>
     </foreign-key>
-    <index id="332" parent="300" name="PRIMARY">
+    <index id="334" parent="300" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="333" parent="300" name="FKlg7qo006o53btuduee8wg0yit">
+    <index id="335" parent="300" name="FKlg7qo006o53btuduee8wg0yit">
       <ColNames>group_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="334" parent="300" name="FKrc585nbh1yt2t3iryk5exodai">
+    <index id="336" parent="300" name="FKrc585nbh1yt2t3iryk5exodai">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="335" parent="300" name="PRIMARY">
+    <key id="337" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

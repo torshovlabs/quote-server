@@ -63,6 +63,27 @@ public class GroupMembershipDAOImpl implements GroupMembershipDAO {
     }
 
     @Override
+    public Optional<GroupMembership> findByGroupAndCanQuote(Long groupId, Boolean canQuote) {
+        TypedQuery<GroupMembership> query = entityManager.createQuery(
+                "SELECT gm FROM GroupMembership gm WHERE gm.group.id = :groupId AND gm.canQuote = :canQuote",
+                GroupMembership.class);
+        query.setParameter("groupId", groupId);
+        query.setParameter("canQuote", canQuote);
+
+        List<GroupMembership> results = query.getResultList();
+        return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
+    }
+
+    @Override
+    public List<GroupMembership> findByGroupOrderByQueueNumber(Long groupId) {
+        TypedQuery<GroupMembership> query = entityManager.createQuery(
+                "SELECT gm FROM GroupMembership gm WHERE gm.group.id = :groupId ORDER BY gm.queueNumber ASC",
+                GroupMembership.class);
+        query.setParameter("groupId", groupId);
+        return query.getResultList();
+    }
+
+    @Override
     public void deleteById(Long id) {
         GroupMembership groupMembership = entityManager.find(GroupMembership.class, id);
         if (groupMembership != null) {
@@ -87,5 +108,23 @@ public class GroupMembershipDAOImpl implements GroupMembershipDAO {
                 Integer.class);
         query.setParameter("groupId", groupId);
         return query.getSingleResult();
+    }
+
+    @Override
+    public void updateCanQuoteStatus(Long membershipId, Boolean canQuote) {
+        GroupMembership membership = entityManager.find(GroupMembership.class, membershipId);
+        if (membership != null) {
+            membership.setCanQuote(canQuote);
+            entityManager.merge(membership);
+        }
+    }
+
+    @Override
+    public void resetAllCanQuoteForGroup(Long groupId, Boolean canQuote) {
+        entityManager.createQuery(
+                        "UPDATE GroupMembership gm SET gm.canQuote = :canQuote WHERE gm.group.id = :groupId")
+                .setParameter("canQuote", canQuote)
+                .setParameter("groupId", groupId)
+                .executeUpdate();
     }
 }

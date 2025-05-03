@@ -110,4 +110,25 @@ public class GroupController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    /**
+     * Get quote status for a group
+     */
+    @RequestMapping(value = "/{groupId}/quote-status", method = GET)
+    public ResponseEntity<?> getQuoteStatus(@PathVariable Long groupId, @RequestParam String username) {
+        try {
+            // Get the current publisher
+            User publisher = groupService.getCurrentPublisher(groupId);
+            boolean isCurrentUser = publisher.getName().equals(username);
+
+            Map<String, Object> result = new HashMap<>();
+            result.put("publisherId", publisher.getId());
+            result.put("publisherName", publisher.getName());
+            result.put("isCurrentUserPublisher", isCurrentUser);
+
+            return ResponseEntity.ok(result);
+        } catch (GroupNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
