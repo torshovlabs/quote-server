@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc9fe51c-91b2-4b2d-b411-4b1495c918de" name="Changes" comment="test">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6dca17c1-918d-490c-ae9f-63bdc3cfbee2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6dca17c1-918d-490c-ae9f-63bdc3cfbee2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/controller/GroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/controller/GroupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/controller/QuoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/controller/QuoteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/GroupMembershipDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/GroupMembershipDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/QuoteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/QuoteDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/impl/GroupMembershipDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/impl/GroupMembershipDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/domain/GroupMembership.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/domain/GroupMembership.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/impl/QuoteDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/dao/impl/QuoteDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/GroupService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/QuoteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/QuoteService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +43,9 @@
     &quot;accountId&quot;: &quot;2dab6a9a-da43-497f-ac71-0e1fcde4cf16&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/torshovlabs/quote/service/GroupService.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
   <component name="KubernetesApiProvider"><![CDATA[{
   "isMigrated": true
@@ -122,7 +124,7 @@
       <option name="presentableId" value="Default" />
       <updated>1746283165996</updated>
       <workItem from="1746283167550" duration="5253000" />
-      <workItem from="1746288596913" duration="8776000" />
+      <workItem from="1746288596913" duration="14138000" />
     </task>
     <task id="LOCAL−00001" summary="her er litt mer utfyllende domain filer">
       <option name="closed" value="true" />

@@ -3,6 +3,7 @@ package com.torshovlabs.quote.dao;
 import com.torshovlabs.quote.domain.Quote;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDateTime;
 
 public interface QuoteDAO {
 
@@ -19,4 +20,6 @@ public interface QuoteDAO {
     void deleteById(Long id);
 
     boolean existsByUserAndGroupAndCreationDateAfter(String userId, Long groupId, java.time.LocalDateTime date);
+
+    LocalDateTime findMostRecentQuoteTimeForGroup(Long groupId);
 }

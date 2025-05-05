@@ -106,4 +106,50 @@ public class GroupService {
                 .orElseThrow(() -> new GroupNotFoundException("No publisher found for this group"))
                 .getUser();
     }
+
+    @Transactional
+    public void rotateQuotePermissions() {
+        List<Group> allGroups = groupDAO.findAll();
+
+        for (Group group : allGroups) {
+            // Get all memberships for this group ordered by queue number
+            List<GroupMembership> memberships =
+                    groupMembershipDAO.findByGroupIdOrderByQueueNumber(group.getId());
+
+            if (memberships.isEmpty()) {
+                continue; // Skip if no members
+            }
+
+            // Find the current permitted user (if any)
+            GroupMembership currentPermittedMember = null;
+            for (GroupMembership member : memberships) {
+                if (member.getCanQuote() != null && member.getCanQuote()) {
+                    currentPermittedMember = member;
+                    break;
+                }
+            }
+
+            // If no one currently has permission or the last member quoted, start from the beginning
+            int nextIndex = 0;
+            if (currentPermittedMember != null) {
+                // Find the index of the current permitted member
+                for (int i = 0; i < memberships.size(); i++) {
+                    if (memberships.get(i).getId().equals(currentPermittedMember.getId())) {
+                        // Move to the next person in queue
+                        nextIndex = (i + 1) % memberships.size();
+                        break;
+                    }
+                }
+
+                // Remove permission from current user
+                currentPermittedMember.setCanQuote(false);
+                groupMembershipDAO.save(currentPermittedMember);
+            }
+
+            // Grant permission to the next user
+            GroupMembership nextMember = memberships.get(nextIndex);
+            nextMember.setCanQuote(true);
+            groupMembershipDAO.save(nextMember);
+        }
+    }
 }

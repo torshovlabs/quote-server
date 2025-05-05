@@ -94,7 +94,8 @@ public class QuoteController {
                 // If the user is the publisher but can't post yet, get time remaining
                 User publisher = quoteService.getCurrentPublisher(groupId);
                 if (publisher.getName().equals(username)) {
-                    long hoursRemaining = quoteService.getHoursUntilNextQuote(username, groupId);
+                    // Get group-level time restriction info
+                    long hoursRemaining = quoteService.getHoursUntilNextGroupQuote(groupId);
                     result.put("hoursRemaining", hoursRemaining);
                 }
             }
@@ -121,7 +122,8 @@ public class QuoteController {
             if (isCurrentUserPublisher) {
                 canPost = quoteService.canUserPostQuote(username, groupId);
                 if (!canPost) {
-                    hoursRemaining = quoteService.getHoursUntilNextQuote(username, groupId);
+                    // Use the group-level time restriction info
+                    hoursRemaining = quoteService.getHoursUntilNextGroupQuote(groupId);
                 }
             }
 

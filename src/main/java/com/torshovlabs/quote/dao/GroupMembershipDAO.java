@@ -29,4 +29,6 @@ public interface GroupMembershipDAO {
     boolean existsByUserAndGroup(String userId, Long groupId);
 
     int getMaxQueueNumberForGroup(Long groupId);
+
+    List<GroupMembership> findByGroupIdOrderByQueueNumber(Long groupId);
 }

@@ -3,6 +3,7 @@ package com.torshovlabs.quote.dao.impl;
 import com.torshovlabs.quote.dao.QuoteDAO;
 import com.torshovlabs.quote.domain.Quote;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
@@ -68,6 +69,19 @@ public class QuoteDAOImpl implements QuoteDAO {
         Quote quote = entityManager.find(Quote.class, id);
         if (quote != null) {
             entityManager.remove(quote);
+        }
+    }
+
+    @Override
+    public LocalDateTime findMostRecentQuoteTimeForGroup(Long groupId) {
+        try {
+            return entityManager.createQuery(
+                            "SELECT MAX(q.creationDate) FROM Quote q WHERE q.group.id = :groupId",
+                            LocalDateTime.class)
+                    .setParameter("groupId", groupId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // No quotes yet
         }
     }
 

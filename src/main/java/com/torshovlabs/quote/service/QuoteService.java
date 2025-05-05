@@ -60,18 +60,17 @@ public class QuoteService {
             throw new NotAllowedToPostException("You do not have permission to post quotes in this group");
         }
 
-        // Check if user has already posted in the last 24 hours
         LocalDateTime oneDayAgo = LocalDateTime.now().minusHours(24);
-        if (membership.getLastQuoteTime() != null &&
-                membership.getLastQuoteTime().isAfter(oneDayAgo)) {
+        LocalDateTime mostRecentGroupQuoteTime = quoteDAO.findMostRecentQuoteTimeForGroup(groupId);
 
+        if (mostRecentGroupQuoteTime != null && mostRecentGroupQuoteTime.isAfter(oneDayAgo)) {
             long hoursLeft = ChronoUnit.HOURS.between(
                     LocalDateTime.now(),
-                    membership.getLastQuoteTime().plusHours(24)
+                    mostRecentGroupQuoteTime.plusHours(24)
             ) + 1;
 
-            throw new NotAllowedToPostException("You must wait " + hoursLeft +
-                    " more hours before posting another quote");
+            throw new NotAllowedToPostException("Only one quote per day is allowed in this group. " +
+                    "Next quote will be available in " + hoursLeft + " hours.");
         }
 
         // Create the quote
@@ -190,10 +189,11 @@ public class QuoteService {
             return false;
         }
 
-        // Check if 24 hours have passed since last quote
-        if (membership.get().getLastQuoteTime() != null) {
-            LocalDateTime oneDayAgo = LocalDateTime.now().minusHours(24);
-            return membership.get().getLastQuoteTime().isBefore(oneDayAgo);
+        // Check if any quote has been posted in the group in the last 24 hours
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusHours(24);
+        LocalDateTime mostRecentGroupQuoteTime = quoteDAO.findMostRecentQuoteTimeForGroup(groupId);
+        if (mostRecentGroupQuoteTime != null && mostRecentGroupQuoteTime.isAfter(oneDayAgo)) {
+            return false;
         }
 
         return true;
@@ -203,26 +203,21 @@ public class QuoteService {
      * Get time remaining until a user can post again
      */
     @Transactional(readOnly = true)
-    public long getHoursUntilNextQuote(String username, Long groupId)
-            throws UserNotFoundException, GroupNotFoundException, NotAllowedToPostException {
+    public long getHoursUntilNextGroupQuote(Long groupId) throws GroupNotFoundException {
+        Group group = groupDAO.findById(groupId)
+                .orElseThrow(() -> new GroupNotFoundException("Group not found with ID: " + groupId));
 
-        User user = userDAO.findByName(username)
-                .orElseThrow(() -> new UserNotFoundException("User not found: " + username));
-
-        GroupMembership membership = groupMembershipDAO.findByUserAndGroup(user.getId(), groupId)
-                .orElseThrow(() -> new NotAllowedToPostException("User is not a member of this group"));
-
-        if (membership.getLastQuoteTime() == null) {
-            return 0;
+        LocalDateTime mostRecentGroupQuoteTime = quoteDAO.findMostRecentQuoteTimeForGroup(groupId);
+        if (mostRecentGroupQuoteTime == null) {
+            return 0; // No quotes yet, can post immediately
         }
 
-        LocalDateTime nextAllowedTime = membership.getLastQuoteTime().plusHours(24);
+        LocalDateTime nextAllowedTime = mostRecentGroupQuoteTime.plusHours(24);
         LocalDateTime now = LocalDateTime.now();
 
         if (now.isAfter(nextAllowedTime)) {
-            return 0;
+            return 0; // 24 hours have passed, can post now
         }
 
         return ChronoUnit.HOURS.between(now, nextAllowedTime) + 1; // +1 to round up
-    }
-}
+    }}

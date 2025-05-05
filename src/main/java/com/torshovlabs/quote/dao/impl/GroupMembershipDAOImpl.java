@@ -127,4 +127,12 @@ public class GroupMembershipDAOImpl implements GroupMembershipDAO {
                 .setParameter("groupId", groupId)
                 .executeUpdate();
     }
+    @Override
+    public List<GroupMembership> findByGroupIdOrderByQueueNumber(Long groupId) {
+        TypedQuery<GroupMembership> query = entityManager.createQuery(
+                "SELECT gm FROM GroupMembership gm WHERE gm.group.id = :groupId ORDER BY gm.queueNumber",
+                GroupMembership.class);
+        query.setParameter("groupId", groupId);
+        return query.getResultList();
+    }
 }

@@ -6,6 +6,7 @@ import com.torshovlabs.quote.util.exceptions.UsernameAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.torshovlabs.quote.util.exceptions.*;
 
 import java.util.UUID;
 
